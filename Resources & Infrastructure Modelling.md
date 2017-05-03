@@ -54,13 +54,15 @@ Third, what if all steps let you specify a target resource in a very simple way:
 
 For example, here's how we currently model deploying a package to a bunch of VM's running IIS:
 
-![roles-today](https://cloud.githubusercontent.com/assets/47085/25664506/29738732-305e-11e7-8feb-5de43e6d6808.png)
+![Package targets](https://cloud.githubusercontent.com/assets/47085/25664988/a328f408-305f-11e7-92b7-9a8fa91ddab3.png)
 
+However, for Azure websites, we don't use the machines/roles indirection - we just let them specify a variable:
 
+![Web app targets](https://cloud.githubusercontent.com/assets/47085/25664907/65daa8bc-305f-11e7-8f3e-fa3f831ad6a6.png)
 
+Why do we do these differently? Originally we did model Azure web sites as "machines", but they had an annoying downside - you couldn't provision them during a deployment. With the variables approach, you could do that easily because it's just a name. 
 
-
-
+There's got to be a way we can unify this, so that a step can either specify a target by binding a variable to a name, or to a role, or by specifying a name or role. 
 
 
 
