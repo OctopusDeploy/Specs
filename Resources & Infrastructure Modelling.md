@@ -45,8 +45,18 @@ Second, what if we moved environments out of the global scope, and into each pro
  - Other things
  - Load balancers
  - Azure websites
+ 
+Third, what if we let you model many of these not as static machines, but as "descriptors" of a group of machines/resources. For example, imagine you use AWS EC2, and you're constantly provisioning and de-provisioning EC2 instances. Instead of having to continuously add/remove machines in Octopus, you could simply *specify*:
 
-Third, what if all steps let you specify a target resource in a very simple way:
+ > In this environment there is a collection of app servers - they are EC2 instances with both `app-server`, `project-a` and `env-prod` tags.
+
+Octopus would then evaluate them dynamically at the last responsible moment:
+
+ - When you click them for details, we could query AWS to see what instances are there
+ - When you deploy, we'd discover them either at the start of the deployment, or when the step runs
+ - When health checking, right before the health check runs
+
+Fourth, what if all steps let you specify the targets the same way:
 
  - As a specific machine, specifying a different one for each environment
  - As a combination of the resource tags & environment
@@ -60,10 +70,5 @@ However, for Azure websites, we don't use the machines/roles indirection - we ju
 
 ![Web app targets](https://cloud.githubusercontent.com/assets/47085/25664907/65daa8bc-305f-11e7-8f3e-fa3f831ad6a6.png)
 
-Why do we do these differently? Originally we did model Azure web sites as "machines", but they had an annoying downside - you couldn't provision them during a deployment. With the variables approach, you could do that easily because it's just a name. 
+Why do we do these differently? Originally we did model Azure web sites as "machines", but they had an annoying downside - you couldn't provision them during a deployment. With the variables approach, you could do that easily because it's just a name. I think this is something we can now unify. 
 
-There's got to be a way we can unify this, so that a step can either specify a target by binding a variable to a name, or to a role, or by specifying a name or role. 
-
-
-
-We built Octopus to be quite agnostic of the cloud. Whether you use Azure, AWS, Rackspace or machines under Bert's desk, we model them as machines that belong to environments. 
