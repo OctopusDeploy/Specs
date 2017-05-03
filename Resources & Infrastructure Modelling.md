@@ -2,7 +2,11 @@
 status: half-baked
 ---
 
-This proposal is aimed to try and better model how projects map to the underlying resources they are deployed to - the machines, database servers, load balancers, etc.
+The goal of this proposal is to fix some fundamental design flaws in how Octopus models deployment targets. Specifically, I want a model that:
+
+ - Works just as well for deployments to PaaS and serverless architectures, as it does for IaaS
+ - Works just as well for targets that are ephemeral as for those that are long-lived
+ - Works equally well for targets that are long-lived, for those that are ephemerally managed by the cloud (e.g., auto-scale up/down) and for those that are provisioned/de-provisioned during deployment from Octopus (e.g., blue-green deployment)
 
 ## Problem
 
