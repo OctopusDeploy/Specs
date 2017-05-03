@@ -72,3 +72,7 @@ However, for Azure websites, we don't use the machines/roles indirection - we ju
 
 Why do we do these differently? Originally we did model Azure web sites as "machines", but they had an annoying downside - you couldn't provision them during a deployment. With the variables approach, you could do that easily because it's just a name. I think this is something we can now unify. 
 
+## Benefits
+
+
+
