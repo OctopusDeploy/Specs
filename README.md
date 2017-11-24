@@ -14,4 +14,4 @@ We are welcoming contribution, either through:
 
  - Posting questions / joining in on the discussion of issues 
  - Raising issues
- - Submitting PRs for changes to the SPECs
+ - Submitting PRs for changes to the SPECs 
