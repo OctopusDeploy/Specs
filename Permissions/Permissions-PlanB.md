@@ -37,9 +37,16 @@ For example, the `Acme Developers` Team may be assigned the following Roles with
 ## 3. Space Owners 
 Spaces will have owners. A space owner will act like an administrator within that space, in that they can do anything in that space. The owners of a Space can assign permissions for the Space.  Octopus Administrators will be able to delegate the management of a Space.   
 
-Octopus Administrators do not have permissions within a Space by default. 
+Octopus Administrators do not have permissions within a Space by default. This can be achieved by having a global permission called something like `ManageSpaces` which allows for addition and removal of Space Owners. The Space Owner will then have space scoped permissions attached to a (something like) `SpaceOwner` permission.
 
 It is important that it is easy to give users access to everything in Octopus, and that this is easy to do for new installations. This can still be done by combining the Octopus Administrator permissions with the space owner permissions.
+
+## 4. Diliniation of Global vs Space permissions
+Permissions at the current Admin level will begin to be classified as global permissions, and cannot be scoped in-line with how they currently do not support scoping restrictions.
+
+Space permissions will be those that can be scoped by Project, Project Group*, Environment (and Tenant). Note that Project Group simply maps down to Projects.
+
+This will line up the need for new permissions to replace some that need to be at the Space level. The first case is `BuiltInFeedPush` which currently can be scoped per project. The Global Feed (that is available to all spaces) will need a new permission `GlobalBuiltInFeedPush` to be granted as customers move to multiple spaces and chose to use what then become global feeds.
 
 # Migration
 
@@ -50,6 +57,9 @@ All Teams will remain.
 Existing Octopus Administrators will have the ability to Create\Modify\Delete Spaces.
 
 Existing Octopus Administrators will be the owners of the default Space.
+
+# UI
+Permissions can currently be scoped to Project / Environment and Tenant, it's not clear if the permission you're scoping that's part of the role supports all 3. The new permission management UI will need to cater for this to show a breakdown of how permissions scoping will be interpretted when being evaluated/asserted.
 
 # Development
 
